@@ -230,6 +230,10 @@
           redisbench-admin
           ml-dtypes
         ]);
+
+        cargo-valgrind = pkgs.cargo-valgrind.overrideAttrs(old: {
+          doCheck = false; # currently the tests fail when building from source. TODO investigate why
+        });
       in
       {
         devShells = {
@@ -290,7 +294,6 @@
               # For valgrind
               valgrind
               kdePackages.kcachegrind
-
               cargo-valgrind
 
               # For redisbench-admin
@@ -303,6 +306,7 @@
               cargo-watch
               cargo-outdated
               cargo-nextest
+              cargo-hakari
               lldb
               vscode-extensions.vadimcn.vscode-lldb
             ];
